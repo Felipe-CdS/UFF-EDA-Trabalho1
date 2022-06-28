@@ -15,18 +15,24 @@ CFLAGS	= -Wall -Wextra -Werror -I
 INCLUDE	= include
 
 ## Sources
-SRCS	= src/main.c
+SRCS	= $(wildcard src/*.c)
 OBJS	= $(SRCS:.c=.o)
 
 ## Rules
 all:	 $(NAME)
 
-$(NAME):
+$(NAME): $(OBJS)
 ifeq ("$(src/libstructs.a)", "")
 	@make -C libs
 	@cp libs/libstructs.a src/
 endif
-	$(CC) $(SRCS) -Lsrc -lstructs -o a.out $(CFLAGS) $(INCLUDE)
+	$(CC) $^ -Lsrc -lstructs -o a.out $(CFLAGS) $(INCLUDE)
+
+%.o:	%.c
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
+
+clean:
+	@rm -f $(OBJS) $(NAME)
 
 fclean:
 	@make fclean -C libs
@@ -34,7 +40,7 @@ fclean:
 
 re:	fclean $(NAME)
 
-relibs:	
+relibs: fclean	
 	@make re -C libs
 	@cp libs/libstructs.a src/
 	$(CC) $(SRCS) -Lsrc -lstructs -o a.out $(CFLAGS) $(INCLUDE)

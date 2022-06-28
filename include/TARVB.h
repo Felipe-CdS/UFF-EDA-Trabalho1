@@ -1,5 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef TARVB_H
+# define TARVB_H
+# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct ArvB{
   int nchaves, folha, *chave;
@@ -13,3 +15,4 @@ TARVB *TARVB_Busca(TARVB* x, int ch);
 TARVB *TARVB_Insere(TARVB *T, int k, int t);
 TARVB* TARVB_Retira(TARVB* arv, int k, int t);
 void TARVB_Imprime(TARVB *a);
+#endif
