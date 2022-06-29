@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 16:18:25 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/27 19:13:09 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/06/29 11:16:41 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_itable
 {
 	int					id;
 	char				*filename;
-	struct s_itable 	*next;
+	struct s_itable		*next;
 }				t_itable;
 
 t_itable	*it_new(int id, char *filename);
