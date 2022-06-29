@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/29 15:03:36 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:38:25 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	print_aux(t_itree *a, int level)
 				printf("\t");
 				j++;
 			}
-			printf("%d\n", (a->blocks[i])->id);
+			printf("%d | %s\n", (a->blocks[i])->id, *(a->blocks[i])->content);
 			i++;
 		}
 		print_aux(a->c[i], level + 1);

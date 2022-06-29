@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:01:58 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/29 13:55:21 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/06/29 17:07:17 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 # define INODE_TREE_H
 # include <stdlib.h>
 # include <stdio.h>
-
-typedef struct s_datablock
-{
-	int		id;
-	int		previous_id;
-	int		next_id;
-	char	*content;
-}				t_db;
+# include "data_block.h"
 
 typedef struct s_itree
 {
