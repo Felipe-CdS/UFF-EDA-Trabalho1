@@ -6,7 +6,7 @@
 #    By: fcoutinh <felipe_coutinho@id.uff.br>        +#+  +:+       +#+        #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:04:01 by fcoutinh          #+#    #+#              #
-#    Updated: 2022/06/27 18:35:32 by fcoutinh         ###   ########.fr        #
+#    Updated: 2022/06/29 16:40:30 by fcoutinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS	= -Wall -Wextra -Werror -I
 INCLUDE	= ../include
 
 ## Sources
-SRCS	= TARVB.c TLSE.c
+SRCS	= $(wildcard *.c)
 OBJS	= $(SRCS:.c=.o)
 
 ## Rules
