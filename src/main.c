@@ -6,12 +6,10 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/05 09:09:24 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/05 09:12:31 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "TARVB.h"
-#include "TLSE.h"
 #include "inode_table.h"
 #include "inode_tree.h"
 #include "file_methods.h"
