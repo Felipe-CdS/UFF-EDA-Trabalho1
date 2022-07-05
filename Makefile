@@ -24,15 +24,17 @@ all:	 $(NAME)
 $(NAME): $(OBJS)
 ifeq ("$(src/libstructs.a)", "")
 	@make -C libs
-	@cp libs/libstructs.a src/
+	@mv libs/libstructs.a src/
 endif
 	$(CC) $^ -Lsrc -lstructs -o a.out $(CFLAGS) $(INCLUDE)
+	@make clean
 
 %.o:	%.c
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ 
 
 clean:
-	@rm -f $(OBJS) $(NAME)
+	@make clean -C libs
+	@rm -f $(OBJS)
 
 fclean:
 	@make fclean -C libs
@@ -42,7 +44,8 @@ re:	fclean $(NAME)
 
 relibs: fclean	
 	@make re -C libs
-	@cp libs/libstructs.a src/
+	@mv libs/libstructs.a src/
 	$(CC) $(SRCS) -Lsrc -lstructs -o a.out $(CFLAGS) $(INCLUDE)
+	@make clean
 
 .PHONY:	all clean fclean re relibs

@@ -6,11 +6,12 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/29 17:38:25 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/05 08:56:08 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inode_tree.h" 
+#include <unistd.h>
 
 t_itree	*ibt_new(int t)
 {
@@ -71,33 +72,35 @@ t_itree	*ibt_search(t_itree *T, int db_id)
 	return (ibt_search(T->c[i], db_id));
 }
 
-static void	print_aux(t_itree *a, int level)
+static void	print_aux(t_itree *T, int level)
 {
 	int	i;
 	int	j;
+	level++;
 
-	if (a)
+	if (T)
 	{
 		i = 0;
-		while (i <= (a->n_db - 1))
+		while (i <= (T->n_db - 1))
 		{
-			print_aux(a->c[i], level + 1);
+			print_aux(T->c[i], (level + 1));
 			j = 0;
 			while (j <= level)
 			{
 				printf("\t");
 				j++;
 			}
-			printf("%d | %s\n", (a->blocks[i])->id, *(a->blocks[i])->content);
+			printf("%d | %s\n", (T->blocks[i])->id, (*(T->blocks[i])->content));
 			i++;
 		}
-		print_aux(a->c[i], level + 1);
+		print_aux(T->c[i], (level + 1));
 	}
 }
 
 void	ibt_print(t_itree *T)
 {
+	// printf("2) %d | %p | %p | %s\n", (T->blocks[0])->id, (T->blocks[0]), ((T->blocks[0])->content), (*(T->blocks[0])->content));
 	print_aux(T, 0);
+	// (void) print_aux;
+	// printf("4) %d | %p | %p | %s\n", (T->blocks[0])->id, (T->blocks[0]), ((T->blocks[0])->content), (*(T->blocks[0])->content));
 }
-
-// t_itree	*ibt_remove(t_itree *T, t_db datablock, int t);
