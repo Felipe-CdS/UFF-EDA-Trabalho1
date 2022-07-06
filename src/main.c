@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/06 13:05:57 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/06 14:00:53 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ static void test_insert_file()
 	file1.content = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
 
 	file2.filename = "2.jpg";
-	file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de inversão é o seguinte: void inverte (TLSE* l).";
+	file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de  inversão é o seguinte: void inverte (TLSE* l)";
 
 	file3.filename = "X.pdf";
-	file3.content = ""; // handle NULL content or filename
+	file3.content = "íííííííííííííííííííííííííííííííííí"; // handle NULL content or filename
 
 	file4.filename = "invisible.bin";
 	file4.content = "\t\v\f\r\n \f-06050\1\2"; // handle non printable chars and fix '\n'
