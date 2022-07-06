@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/05 08:56:08 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/05 10:49:26 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_itree	*ibt_new(int t)
 		new_node->c[i] = NULL;
 		i++;
 	}
+	i = 0;
 	return (new_node);
 }
 
@@ -74,6 +75,7 @@ t_itree	*ibt_search(t_itree *T, int db_id)
 
 static void	print_aux(t_itree *T, int level)
 {
+	t_db *holder;
 	int	i;
 	int	j;
 	level++;
@@ -90,7 +92,8 @@ static void	print_aux(t_itree *T, int level)
 				printf("\t");
 				j++;
 			}
-			printf("%d | %s\n", (T->blocks[i])->id, (*(T->blocks[i])->content));
+			holder = T->blocks[i];
+			printf("%d | %s\n", holder->id, holder->content);
 			i++;
 		}
 		print_aux(T->c[i], (level + 1));

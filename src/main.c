@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/05 09:12:31 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/05 10:51:01 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,14 @@
 static void test_insert_file()
 {
 	int		t;
-	char	*txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pharetra augue id quam convallis, at dignissim urna vestibulum.";
+	char	*txt = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
 	t_itree	*start;
 
 	t = 2;
 	start = ibt_new(t);
-	start = file_insert(start, t, txt, 5);
+	start = file_insert(start, t, txt, 10);
 	ibt_print(start);
+	ibt_clear(start);
 }
 
 int	main(void)
