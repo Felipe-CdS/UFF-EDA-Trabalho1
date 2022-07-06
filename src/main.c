@@ -126,32 +126,65 @@
 
 static void test_insert_file()
 {
-	int			t, max_buffer;
+	int			i, t, max_buffer;
 	t_itable	*file_list;
 	t_itree		*tree;
-	t_filedata 	file1, file2, file3, file4;
+	char 		*filename, *content;
+	t_filedata 	file;
 	
 	t = 2;
 	max_buffer = 20;
 	file_list = NULL;
 	tree = NULL;
 
-	file1.filename = "1.txt";
-	file1.content = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
+	filename = (char *) malloc(sizeof(char)*1000);
+	content = (char *) malloc(sizeof(char)*1000);
 
-	file2.filename = "2.jpg";
-	file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de inversão é o seguinte: void inverte (TLSE* l).";
+	// file1.filename = "1.txt";
+	// file1.content = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
 
-	file3.filename = "X.pdf";
-	file3.content = ""; // handle NULL content or filename
+	// file2.filename = "2.jpg";
+	// file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de inversão é o seguinte: void inverte (TLSE* l).";
 
-	file4.filename = "invisible.bin";
-	file4.content = "\t\v\f\r\n \f-06050\1\2"; // handle non printable chars and fix '\n'
+	// file3.filename = "X.pdf";
+	// file3.content = ""; // handle NULL content or filename
 
-	tree = file_insert(&file_list, tree, t, file1, max_buffer); 
-	tree = file_insert(&file_list, tree, t, file2, max_buffer);
-	tree = file_insert(&file_list, tree, t, file3, max_buffer);
-	tree = file_insert(&file_list, tree, t, file4, max_buffer);
+	// file4.filename = "invisible.bin";
+	// file4.content = "\t\v\f\r\n \f-06050\1\2"; // handle non printable chars and fix '\n'
+
+	// tree = file_insert(&file_list, tree, t, file1, max_buffer); 
+	// tree = file_insert(&file_list, tree, t, file2, max_buffer);
+	// tree = file_insert(&file_list, tree, t, file3, max_buffer);
+	// tree = file_insert(&file_list, tree, t, file4, max_buffer);
+
+	t = 2;
+	i = 0;
+
+	printf("Digite o grau minimo. Se o valor digitado for menor que 2, t sera considerado igual a 2...\n");
+	scanf("%d", &t);
+
+	if(t < 2) t = 2;
+	while(i != -1){
+		printf("(Digite 1 para criar um novo arquivo; -1 para sair): ");
+		scanf("%d", &i);
+		printf("\n");
+		if(i == 1){
+			printf("Insira o nome do arquivo a ser criado: ");
+			scanf("%*c%[^\n]", filename);
+			printf("\n");
+			printf("Insira o conteúdo do arquivo: ");
+			scanf("%*c%[^\n]", content);
+			printf("\n");
+
+			file.filename = strdup(filename);
+			file.content = strdup(content);
+
+			tree = file_insert(&file_list, tree, t, file, max_buffer);
+		}
+	}
+
+	free(filename);
+	free(content);
 	
 	it_print(&file_list);
 	
