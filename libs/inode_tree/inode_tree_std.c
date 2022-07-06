@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/05 10:49:26 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/06 12:55:56 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	print_aux(t_itree *T, int level)
 				j++;
 			}
 			holder = T->blocks[i];
-			printf("%d | %s\n", holder->id, holder->content);
+			printf("%02d | %s\n", holder->id, holder->content);
 			i++;
 		}
 		print_aux(T->c[i], (level + 1));
@@ -102,8 +102,5 @@ static void	print_aux(t_itree *T, int level)
 
 void	ibt_print(t_itree *T)
 {
-	// printf("2) %d | %p | %p | %s\n", (T->blocks[0])->id, (T->blocks[0]), ((T->blocks[0])->content), (*(T->blocks[0])->content));
 	print_aux(T, 0);
-	// (void) print_aux;
-	// printf("4) %d | %p | %p | %s\n", (T->blocks[0])->id, (T->blocks[0]), ((T->blocks[0])->content), (*(T->blocks[0])->content));
 }

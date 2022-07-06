@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/05 10:51:01 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:05:57 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,38 @@
 
 static void test_insert_file()
 {
-	int		t;
-	char	*txt = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
-	t_itree	*start;
-
+	int			t, max_buffer;
+	t_itable	*file_list;
+	t_itree		*tree;
+	t_filedata 	file1, file2, file3, file4;
+	
 	t = 2;
-	start = ibt_new(t);
-	start = file_insert(start, t, txt, 10);
-	ibt_print(start);
-	ibt_clear(start);
+	max_buffer = 20;
+	file_list = NULL;
+	tree = NULL;
+
+	file1.filename = "1.txt";
+	file1.content = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
+
+	file2.filename = "2.jpg";
+	file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de inversão é o seguinte: void inverte (TLSE* l).";
+
+	file3.filename = "X.pdf";
+	file3.content = ""; // handle NULL content or filename
+
+	file4.filename = "invisible.bin";
+	file4.content = "\t\v\f\r\n \f-06050\1\2"; // handle non printable chars and fix '\n'
+
+	tree = file_insert(&file_list, tree, t, file1, max_buffer); 
+	tree = file_insert(&file_list, tree, t, file2, max_buffer);
+	tree = file_insert(&file_list, tree, t, file3, max_buffer);
+	tree = file_insert(&file_list, tree, t, file4, max_buffer);
+	
+	it_print(&file_list);
+	
+	ibt_print(tree);
+	it_clear(&file_list);
+	ibt_clear(tree);
 }
 
 int	main(void)
