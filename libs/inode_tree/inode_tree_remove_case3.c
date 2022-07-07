@@ -119,6 +119,8 @@ static void	case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 
 static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 {
+	// if(datablock->id == 8) printf("entrou caso 3\n");
+		
 	int		j;
 	t_itree	*tmp;
 	t_itree	*y;
@@ -145,6 +147,7 @@ static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 		{
 			z->c[(t + j)] = y->c[j];
 			y->c[j] = NULL;
+			j++;
 		}
 		ibt_clear(y);
 	}
@@ -160,6 +163,13 @@ static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 	else
 	T->c[(i - 1)] = z;
 	T = ibt_remove(T, datablock, t);
+
+	// aqui da pra ver q o 8 foi removido normal
+	// if(datablock->id == 8){
+	// 	printf("\n---\n");
+	// 	ibt_print(T);
+	// 	printf("\n");
+	// }
 }
 
 int	rmv_case3_handler(t_itree *T, t_db *datablock, int t, int i)

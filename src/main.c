@@ -181,8 +181,9 @@ static void test_insert_file()
 				tree = file_insert(&file_list, tree, t, file, max_buffer);
 			}
 			else if(op == 'n') {
-				printf("Insira o nome do arquivo a ser carregado: ");
-				scanf("%*c%[^\n]", filename);
+				// printf("Insira o nome do arquivo a ser carregado: ");
+				// scanf("%*c%[^\n]", filename);
+				filename = "teste.txt";
 				
 				fp = fopen(filename, "r");
 				if(!fp) printf("Arquivo não encontrado\n");
@@ -203,8 +204,9 @@ static void test_insert_file()
 			}
 		}
 		else if (op == 'r'){
-			printf("Insira o nome do arquivo a ser removido: ");
-			scanf("%*c%[^\n]", filename);
+			// printf("Insira o nome do arquivo a ser removido: ");
+			// scanf("%*c%[^\n]", filename);
+			filename = "teste.txt";
 
 			file_remove(&file_list, tree, t, filename);
 		}

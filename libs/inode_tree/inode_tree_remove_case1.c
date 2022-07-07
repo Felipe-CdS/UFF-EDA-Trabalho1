@@ -15,23 +15,20 @@
 
 int	rmv_case1_handler(t_itree *T, t_db *datablock, int i)
 {
-	if (i < T->n_db && (T->blocks[i])->id == datablock->id)
+	if (i < T->n_db && (T->blocks[i])->id == datablock->id && (T->leaf))
 	{
-		if (T->leaf)
+		while (i < (T->n_db - 1))
 		{
-			while (i < (T->n_db - 1))
-			{
-				T->blocks[i] = T->blocks[(i + 1)];
-				i++;
-			}
-			T->n_db--;
-			if (!T->n_db)
-			{
-				ibt_clear(T);
-				T = NULL;
-			}
-			return (1);
+			T->blocks[i] = T->blocks[(i + 1)];
+			i++;
 		}
+		T->n_db--;
+		if (!T->n_db)
+		{
+			ibt_clear(T);
+			T = NULL;
+		}
+		return (1);
 	}
 	return (0);
 }
