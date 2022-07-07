@@ -14,6 +14,7 @@
 # define INODE_TABLE_H
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 
 typedef struct s_itable
 {
@@ -31,5 +32,6 @@ void		it_delone(t_itable **start, t_itable *target);
 void		it_clear(t_itable **start);
 void		it_print(t_itable **start);
 
+int 		it_search(t_itable *start, char *filename);
 int			it_size(t_itable *start);
 #endif

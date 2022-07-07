@@ -93,6 +93,13 @@ int	it_size(t_itable *start)
 	return (it_size(start->next) + 1);
 }
 
+int it_search(t_itable *start, char *filename)
+{
+	if(!start) return NULL;
+	if(!strcmp(start->filename, filename)) return start->id;
+	return it_search(start->next, filename);
+}
+
 void	it_print(t_itable **start)
 {
 	t_itable	*p;

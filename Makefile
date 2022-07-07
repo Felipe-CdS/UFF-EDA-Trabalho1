@@ -11,7 +11,7 @@
 ## Vars
 CC	= gcc
 NAME	= a.out
-CFLAGS	= -Wall -Wextra -Werror -I
+CFLAGS	= -Wall -Wextra  -I
 INCLUDE	= include
 
 ## Sources

@@ -12,35 +12,28 @@
 
 #include "file_methods.h"
 
-t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int max_len)
-{
-    int i, id, previous_id, txt_len;
-
+t_itree *file_remove_aux(t_itree *T, int id, int t){
+    int i = 0;
+    t_itree *aux;
     t_db *db;
-    char *p;
 
-    i = 0;
-	p = NULL;
-    db = NULL;
-    id = db_getid();
-    previous_id = -1;
-	it_add_back(list, it_new(id, data.filename));
-    txt_len = strlen(data.content);
-	if(!txt_len)
-	{
-		db = db_new(id, -1, "");
-		T = ibt_insert(T, db, t);
-		return (T);
-	}
-    for(i = 0; i < txt_len; i = i + max_len){
-		if(i)
-			id = db_getid();
-		p = strndup((data.content + i), max_len);
-        db = db_new(id, previous_id, p);
-        if(i < txt_len - max_len) db->next_id = id + 1;
-        T = ibt_insert(T, db, t);
-        previous_id = id;
-        free(p);
+    aux = ibt_search(T, id);
+
+    while((i < aux->n_db) && (aux->blocks[i]->id != id)) i++;
+    db = aux->blocks[i];
+
+    // printf("%d | %d\n", db->id, db->next_id);
+    if(db->next_id != -1) T = file_remove_aux(T, db->next_id, t);
+    return ibt_remove(T, db, t);
+}
+
+t_itree *file_remove(t_itable **list, t_itree *T, int t, char *filename){
+    int id;
+    id = it_search(*list, filename);
+    if(!id) {
+        printf("Arquivo não encontrado\n");
     }
-    return T;
+
+    T = file_remove_aux(T, id, t);
+    return (T);
 }

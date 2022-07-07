@@ -161,7 +161,8 @@ static void test_insert_file()
 		printf("Escolha a operação (a: adicionar; r: remover)\n");
 		scanf(" %c", &op);
 		printf("\n");
-		if(tolower(op) == 'a'){
+		op = tolower(op);
+		if(op == 'a'){
 			printf("Deseja criar um arquivo novo? (s/n): ");
 			scanf(" %c", &op);
 			printf("\n");
@@ -200,6 +201,12 @@ static void test_insert_file()
 					tree = file_insert(&file_list, tree, t, file, max_buffer);
 				}
 			}
+		}
+		else if (op == 'r'){
+			printf("Insira o nome do arquivo a ser removido: ");
+			scanf("%*c%[^\n]", filename);
+
+			file_remove(&file_list, tree, t, filename);
 		}
 
 		it_print(&file_list);
