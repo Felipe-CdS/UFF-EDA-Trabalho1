@@ -14,6 +14,7 @@
 #include "inode_tree.h"
 #include "file_methods.h"
 #include <string.h>
+#include <ctype.h>
 
 // static void test_itable()
 // {
@@ -126,11 +127,12 @@
 
 static void test_insert_file()
 {
-	int			i, t, max_buffer;
+	int			i, t, max_buffer, fsize;
 	t_itable	*file_list;
 	t_itree		*tree;
-	char 		*filename, *content;
+	char 		*filename, *content, *newfile_name, *newfile_content, op;
 	t_filedata 	file;
+	FILE *fp;
 	
 	t = 2;
 	max_buffer = 20;
@@ -139,23 +141,14 @@ static void test_insert_file()
 
 	filename = (char *) malloc(sizeof(char)*1000);
 	content = (char *) malloc(sizeof(char)*1000);
-
-	// file1.filename = "1.txt";
-	// file1.content = "O rato roeu a roupa do rei de Roma, O rato roeu a roupa do rei da Rússia, O rato roeu a roupa do RodovaIho... O rato a roer roía E a rosa Rita Ramalho do rato a roer se ria. O rato roeu a roupa do rei de roma a rainha com raiva roeu o resto.";
-
-	// file2.filename = "2.jpg";
-	// file2.content = "Escreva uma função em C que, dada uma lista l qualquer, inverta os elementos de l. O protótipo da função de inversão é o seguinte: void inverte (TLSE* l).";
+	newfile_name = (char *) malloc(sizeof(char)*1000);
+	newfile_content = (char *) malloc(sizeof(char)*1000);
 
 	// file3.filename = "X.pdf";
 	// file3.content = ""; // handle NULL content or filename
 
 	// file4.filename = "invisible.bin";
 	// file4.content = "\t\v\f\r\n \f-06050\1\2"; // handle non printable chars and fix '\n'
-
-	// tree = file_insert(&file_list, tree, t, file1, max_buffer); 
-	// tree = file_insert(&file_list, tree, t, file2, max_buffer);
-	// tree = file_insert(&file_list, tree, t, file3, max_buffer);
-	// tree = file_insert(&file_list, tree, t, file4, max_buffer);
 
 	t = 2;
 	i = 0;
@@ -165,26 +158,49 @@ static void test_insert_file()
 
 	if(t < 2) t = 2;
 	while(i != -1){
-		printf("(Digite 1 para criar um novo arquivo; -1 para sair): ");
-		scanf("%d", &i);
+		printf("Deseja criar um arquivo novo? (s/n): ");
+		scanf(" %c", &op);
 		printf("\n");
-		if(i == 1){
+		if(tolower(op) == 's'){
 			printf("Insira o nome do arquivo a ser criado: ");
-			scanf("%*c%[^\n]", filename);
+			scanf("%*c%[^\n]", newfile_name);
 			printf("\n");
 			printf("Insira o conteúdo do arquivo: ");
-			scanf("%*c%[^\n]", content);
+			scanf("%*c%[^\n]", newfile_content);
 			printf("\n");
+
+			file.filename = strdup(newfile_name);
+			file.content = strdup(newfile_content);
+
+			tree = file_insert(&file_list, tree, t, file, max_buffer);
+		}
+		else {
+			printf("Insira o nome do arquivo a ser carregado: ");
+			scanf("%*c%[^\n]", filename);
+			
+			fp = fopen(filename, "r");
+			if(!fp) printf("Arquivo não encontrado\n");
+			fseek(fp, 0, SEEK_END);
+			fsize = ftell(fp);
+			rewind(fp);
+			content = (char *) malloc(sizeof(char)*(fsize + 1));
+			fread(content, fsize, 1, fp);
+			fclose(fp);
+			content[fsize] = 0;
 
 			file.filename = strdup(filename);
 			file.content = strdup(content);
 
 			tree = file_insert(&file_list, tree, t, file, max_buffer);
 		}
+		it_print(&file_list);
+		ibt_print(tree);
 	}
 
-	free(filename);
 	free(content);
+	free(filename);
+	free(newfile_name);
+	free(newfile_content);
 	
 	it_print(&file_list);
 	
