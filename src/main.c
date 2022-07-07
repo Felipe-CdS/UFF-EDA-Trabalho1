@@ -158,41 +158,50 @@ static void test_insert_file()
 
 	if(t < 2) t = 2;
 	while(i != -1){
-		printf("Deseja criar um arquivo novo? (s/n): ");
+		printf("Escolha a operação (a: adicionar; r: remover)\n");
 		scanf(" %c", &op);
 		printf("\n");
-		if(tolower(op) == 's'){
-			printf("Insira o nome do arquivo a ser criado: ");
-			scanf("%*c%[^\n]", newfile_name);
+		if(tolower(op) == 'a'){
+			printf("Deseja criar um arquivo novo? (s/n): ");
+			scanf(" %c", &op);
 			printf("\n");
-			printf("Insira o conteúdo do arquivo: ");
-			scanf("%*c%[^\n]", newfile_content);
-			printf("\n");
+			op = tolower(op);
+			if(op == 's'){
+				printf("Insira o nome do arquivo a ser criado: ");
+				scanf("%*c%[^\n]", newfile_name);
+				printf("\n");
+				printf("Insira o conteúdo do arquivo: ");
+				scanf("%*c%[^\n]", newfile_content);
+				printf("\n");
 
-			file.filename = strdup(newfile_name);
-			file.content = strdup(newfile_content);
+				file.filename = strdup(newfile_name);
+				file.content = strdup(newfile_content);
 
-			tree = file_insert(&file_list, tree, t, file, max_buffer);
+				tree = file_insert(&file_list, tree, t, file, max_buffer);
+			}
+			else if(op == 'n') {
+				printf("Insira o nome do arquivo a ser carregado: ");
+				scanf("%*c%[^\n]", filename);
+				
+				fp = fopen(filename, "r");
+				if(!fp) printf("Arquivo não encontrado\n");
+				else {
+					fseek(fp, 0, SEEK_END);
+					fsize = ftell(fp);
+					rewind(fp);
+					content = (char *) malloc(sizeof(char)*(fsize + 1));
+					fread(content, fsize, 1, fp);
+					fclose(fp);
+					content[fsize] = 0;
+
+					file.filename = strdup(filename);
+					file.content = strdup(content);
+
+					tree = file_insert(&file_list, tree, t, file, max_buffer);
+				}
+			}
 		}
-		else {
-			printf("Insira o nome do arquivo a ser carregado: ");
-			scanf("%*c%[^\n]", filename);
-			
-			fp = fopen(filename, "r");
-			if(!fp) printf("Arquivo não encontrado\n");
-			fseek(fp, 0, SEEK_END);
-			fsize = ftell(fp);
-			rewind(fp);
-			content = (char *) malloc(sizeof(char)*(fsize + 1));
-			fread(content, fsize, 1, fp);
-			fclose(fp);
-			content[fsize] = 0;
 
-			file.filename = strdup(filename);
-			file.content = strdup(content);
-
-			tree = file_insert(&file_list, tree, t, file, max_buffer);
-		}
 		it_print(&file_list);
 		ibt_print(tree);
 	}
