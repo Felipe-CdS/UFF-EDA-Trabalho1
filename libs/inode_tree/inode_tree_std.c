@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 12:12:06 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 16:29:14 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_itree	*ibt_search(t_itree *T, int db_id)
 	int	i;
 
 	i = 0;
-	if (!T)
+	if (!T || db_id == -1)
 		return (NULL);
 	while (i < T->n_db && db_id > (T->blocks[i])->id)
 		i++;

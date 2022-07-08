@@ -6,24 +6,27 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 08:58:59 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 14:16:29 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 19:03:45 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file_methods.h"
 
-t_itree *file_remove_aux(t_itree *T, int id, int t){
-    int i = 0;
+static t_itree *file_remove_aux(t_itree *T, int id, int t){
+    int i;
     t_itree *aux;
     t_db *db;
 
+	i = 0;
     aux = ibt_search(T, id);
-    while((i < aux->n_db) && (aux->blocks[i]->id != id)) 
+	if(!aux)
+		return (T);
+	while((i < aux->n_db) && (aux->blocks[i]->id != id)) 
 		i++;
-    db = aux->blocks[i];
-    if(db->next_id != -1)
-		T = file_remove_aux(T, db->next_id, t);
-    return (ibt_remove(T, db, t));
+	db = aux->blocks[i];
+	T = file_remove_aux(T, db->next_id, t);
+	T = ibt_remove(T, db, t);
+	return (T);
 }
 
 t_itree *file_remove(t_itable **list, t_itree *T, int t, char *filename){
