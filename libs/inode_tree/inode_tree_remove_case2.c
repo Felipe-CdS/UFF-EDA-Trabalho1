@@ -6,14 +6,14 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:30:48 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/04 20:35:37 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:54:49 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inode_tree.h"
 #include "private_headers/inode_tree_rmv_cases.h"
 
-static void	case_2a(t_itree *T, int t, int i)
+static t_itree *case_2a(t_itree *T, int t, int i)
 {
 	t_db	*tmp;
 	t_itree	*y;
@@ -24,9 +24,10 @@ static void	case_2a(t_itree *T, int t, int i)
 	tmp = y->blocks[(y->n_db - 1)];
 	T->c[i] = ibt_remove(T->c[i], tmp, t);
 	T->blocks[i] = tmp;
+	return (T);
 }
 
-static void	case_2b(t_itree *T, int t, int i)
+static t_itree *case_2b(t_itree *T, int t, int i)
 {
 	t_db	*tmp;
 	t_itree	*y;
@@ -37,9 +38,10 @@ static void	case_2b(t_itree *T, int t, int i)
 	tmp = y->blocks[0];
 	y = ibt_remove(T->c[(i + 1)], tmp, t);
 	T->blocks[i] = tmp;
+	return (T);
 }
 
-static void	case_2c(t_itree *T, t_db *datablock, int t, int i)
+static t_itree *case_2c(t_itree *T, t_db *datablock, int t, int i)
 {
 	int		j;
 	t_itree	*tmp;
@@ -87,27 +89,17 @@ static void	case_2c(t_itree *T, t_db *datablock, int t, int i)
 	}
 	else
 		T->c[i] = ibt_remove(T->c[i], datablock, t);
+	return (T);
 }
 
-int	rmv_case2_handler(t_itree *T, t_db *datablock, int t, int i)
+t_itree	*rmv_case2_handler(t_itree *T, t_db *datablock, int t, int i)
 {
-	if (i < T->n_db && (T->blocks[i])->id == datablock->id)
-	{
-		if (!T->leaf && CHK_THIS_C_T)
-		{
-			case_2a(T, t, i);
-			return (1);
-		}
-		if (!T->leaf && CHK_NEXT_C_T)
-		{
-			case_2b(T, t, i);
-			return (1);
-		}
-		if (!T->leaf && CHK_NEXT_C_MIN && CHK_THIS_C_MIN)
-		{
-			case_2c(T, datablock, t, i);
-			return (1);
-		}
-	}
-	return (0);
+	printf(">Case 2\n");
+	if (!T->leaf && CHK_THIS_C_T)
+		T = case_2a(T, t, i);
+	if (!T->leaf && CHK_NEXT_C_T)
+		T = case_2b(T, t, i);
+	if (!T->leaf && CHK_NEXT_C_MIN && CHK_THIS_C_MIN)
+		T = case_2c(T, datablock, t, i);
+	return (T);
 }

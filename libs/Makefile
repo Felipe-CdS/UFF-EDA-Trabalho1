@@ -6,14 +6,14 @@
 #    By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/27 12:04:01 by fcoutinh          #+#    #+#              #
-#    Updated: 2022/07/04 17:54:30 by fcoutinh         ###   ########.fr        #
+#    Updated: 2022/07/08 10:53:29 by fcoutinh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## Vars
 CC	= gcc
 NAME	= libstructs.a
-CFLAGS	= -Wall -Wextra  -I
+CFLAGS	= -Wall -Wextra -Werror -I
 INCLUDE	= ../include
 
 ## Sources

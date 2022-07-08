@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:43:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/29 16:50:18 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:03:45 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	it_add_back(t_itable **start, t_itable *new)
 		*start = new;
 }
 
-void	it_delone(t_itable **start, t_itable *target)
+void	it_remove(t_itable **start, t_itable *target)
 {
 	t_itable	*x;
 	t_itable	*previous;
 
 	x = (*start);
+	previous = NULL;	
 	while (x && x != target)
 	{
 		previous = x;
@@ -66,7 +67,10 @@ void	it_delone(t_itable **start, t_itable *target)
 	}
 	if (x)
 	{
-		previous->next = x->next;
+		if(previous)
+			previous->next = x->next;
+		else
+			*start = x->next; 
 		free(x);
 	}
 }
@@ -93,10 +97,12 @@ int	it_size(t_itable *start)
 	return (it_size(start->next) + 1);
 }
 
-int it_search(t_itable *start, char *filename)
+t_itable	*it_search(t_itable *start, char *filename)
 {
-	if(!start) return NULL;
-	if(!strcmp(start->filename, filename)) return start->id;
+	if(!start) 
+		return (NULL);
+	if(!strcmp(start->filename, filename)) 
+		return (start);
 	return it_search(start->next, filename);
 }
 

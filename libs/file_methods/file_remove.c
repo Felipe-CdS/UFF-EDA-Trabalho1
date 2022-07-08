@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_insert.c                                      :+:      :+:    :+:   */
+/*   file_remove.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 08:58:59 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/06 12:56:20 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 14:16:29 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,26 @@ t_itree *file_remove_aux(t_itree *T, int id, int t){
     t_db *db;
 
     aux = ibt_search(T, id);
-    while((i < aux->n_db) && (aux->blocks[i]->id != id)) i++;
+    while((i < aux->n_db) && (aux->blocks[i]->id != id)) 
+		i++;
     db = aux->blocks[i];
-    
-    if(db->next_id != -1) T = file_remove_aux(T, db->next_id, t);
-
-    printf("REMOVENDO %d\n", id);
-    ibt_print(T);
-    printf("\n");
-
-    // comparação entre o retorno do 8 e 9 (descomentar só 1 por vez)
-    // printf("TESTANDO RETORNO DO %d\n", id);
-    // if(db->id == 9) ibt_print(ibt_remove(T, db, t));
-    // if(db->id == 8) ibt_print(ibt_remove(T, db, t));
-
-    return ibt_remove(T, db, t);
+    if(db->next_id != -1)
+		T = file_remove_aux(T, db->next_id, t);
+    return (ibt_remove(T, db, t));
 }
 
 t_itree *file_remove(t_itable **list, t_itree *T, int t, char *filename){
     int id;
-    id = it_search(*list, filename);
-    if(!id) {
-        printf("Arquivo não encontrado\n");
-        return NULL;
+	t_itable *list_node;
+
+	list_node = it_search(*list, filename);
+    if(list_node) {
+		id = list_node->id;
+		T = file_remove_aux(T, id, t);
+		it_remove(list, list_node);
+		printf(">%s removido.\n", filename);
+		return (T);
     }
-    T = file_remove_aux(T, id, t);
-    return (T);
+	printf("Arquivo não encontrado\n");
+	return (NULL);  
 }

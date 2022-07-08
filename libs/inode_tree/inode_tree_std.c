@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/06 12:55:56 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:12:06 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	print_aux(t_itree *T, int level)
 				j++;
 			}
 			holder = T->blocks[i];
-			printf("%02d | %s\n", holder->id, holder->content);
+			printf("%02d - |%s|\n", holder->id, holder->content);
 			i++;
 		}
 		print_aux(T->c[i], (level + 1));
@@ -102,5 +102,8 @@ static void	print_aux(t_itree *T, int level)
 
 void	ibt_print(t_itree *T)
 {
-	print_aux(T, 0);
+	if(!T)
+		printf(">A arvore esta vazia no momento. Adicione um arquivo para utilizar essa opção.\n\n");
+	else
+		print_aux(T, 0);
 }
