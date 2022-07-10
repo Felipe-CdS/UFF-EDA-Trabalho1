@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:01:58 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/06/29 17:07:17 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 09:41:01 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_itree
 t_itree	*ibt_new(int t);
 t_itree	*ibt_clear(t_itree *target); // Free all tree
 t_itree	*ibt_search(t_itree *T, int db_id);
+t_db	*ibt_get_db_by_id(t_itree *T, int id);
 t_itree	*ibt_insert(t_itree *T, t_db *datablock, int t);
 t_itree	*ibt_remove(t_itree *T, t_db *datablock, int t);
 
