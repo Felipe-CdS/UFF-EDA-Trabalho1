@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:43:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 12:03:45 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 12:52:17 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_itable	*it_new(int id, char *filename)
 	if (!new)
 		return (NULL);
 	new->id = id;
-	new->filename = filename;
+	new->filename = strdup(filename);
 	new->next = NULL;
 	return (new);
 }
@@ -71,6 +71,7 @@ void	it_remove(t_itable **start, t_itable *target)
 			previous->next = x->next;
 		else
 			*start = x->next; 
+		free(x->filename);
 		free(x);
 	}
 }
@@ -109,7 +110,8 @@ t_itable	*it_search(t_itable *start, char *filename)
 void	it_print(t_itable **start)
 {
 	t_itable	*p;
-
+	
+	p = NULL;
 	p = (*start);
 	printf("+---------------------------------------+\n");
 	printf("|\t\ti-nodes Table\t\t|\n");
