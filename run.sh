@@ -13,4 +13,4 @@ PRINT="l"
 ## Script
 make relibs
 clear
-cat <(echo $T) <(echo $ADD_FILE1) <(echo $ADD_FILE2) <(echo $ADD_FILE3) <(echo $PRINT) <(echo $RMV_FILE3) <(echo $PRINT) - | ./a.out
+cat <(echo $T) <(echo $ADD_FILE1) <(echo $ADD_FILE2) <(echo $ADD_FILE3) <(echo $PRINT) <(echo $PRINT) - | ./a.out

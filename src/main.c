@@ -48,7 +48,7 @@ static void test_insert_file()
 
 	if(t < 2) t = 2;
 	while(i != -1){
-		printf("Escolha a operação (a: adicionar; r: remover; l: printar lista; t: printar arvore)\n");
+		printf("Escolha uma operação:\n\na: adicionar arquivo;\nr: remover arquivo;\nl: printar tabela;\nt: printar arvore;\np: printar arquivo\n");
 		scanf(" %c", &op);
 		printf("\n");
 		op = tolower(op);
@@ -102,6 +102,11 @@ static void test_insert_file()
 		}
 		else if (op == 't'){
 			ibt_print(tree);
+		}
+		else if (op == 'p'){
+			printf("Insira o nome do arquivo a ser printado:\n");
+			scanf("%*c%[^\n]", filename);
+			file_print(&file_list, tree, filename);
 		}
 	}
 	free(content);

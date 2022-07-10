@@ -25,5 +25,6 @@ typedef struct s_filedata
 
 t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int max_len);
 t_itree *file_remove(t_itable **list, t_itree *T, int t, char *filename);
+void file_print(t_itable **list, t_itree *T, char *filename);
 
 #endif

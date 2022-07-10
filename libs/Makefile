@@ -13,7 +13,7 @@
 ## Vars
 CC	= gcc
 NAME	= libstructs.a
-CFLAGS	= -Wall -Wextra -Werror -I
+CFLAGS	= -Wall -Wextra  -I
 INCLUDE	= ../include
 
 ## Sources
