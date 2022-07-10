@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 14:12:10 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 10:09:35 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void test_insert_file()
 	
 	t = 2;
 	max_buffer = 20;
+	
 	file_list = NULL;
 	tree = NULL;
-
 	filename = (char *) malloc(sizeof(char)*1000);
 	content = (char *) malloc(sizeof(char)*1000);
 	newfile_name = (char *) malloc(sizeof(char)*1000);
@@ -48,7 +48,7 @@ static void test_insert_file()
 
 	if(t < 2) t = 2;
 	while(i != -1){
-		printf("Escolha a operação (a: adicionar; r: remover; l: printar lista; t: printar arvore)\n");
+		printf("Escolha a operação (a: adicionar; r: remover; l: printar lista; t: printar arvore; s: procurar string;)\n");
 		scanf(" %c", &op);
 		printf("\n");
 		op = tolower(op);
@@ -102,6 +102,15 @@ static void test_insert_file()
 		}
 		else if (op == 't'){
 			ibt_print(tree);
+		}
+		else if (op == 's'){
+			char		search_str[1000];
+			char		**search_ptr = NULL;
+			printf("Insira o nome do arquivo onde a string vai ser procurada:\n");
+			scanf("%*c%[^\n]", filename);
+			printf("Insira a string:\n");
+			scanf("%*c%[^\n]", search_str);
+			printf(">%p\n", file_search(&file_list, tree, filename, search_str, search_ptr));
 		}
 	}
 	free(content);

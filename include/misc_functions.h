@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_block.h                                       :+:      :+:    :+:   */
+/*   misc_functions.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 17:00:02 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:40:34 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/09 18:55:44 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 09:48:47 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_BLOCK_H
-# define DATA_BLOCK_H
-# include <stdlib.h>
+#ifndef MISC_FUNCTIONS_H
+# define MISC_FUNCTIONS_H
+#include <string.h>
+#include <stdlib.h>
 
-typedef struct s_datablock
-{
-	int		id;
-	int		previous_id;
-	int		next_id;
-	char	*content;
-}				t_db;
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
-t_db	*db_new(int id, int previous_id, char *content);
-void	db_del(t_db *target);
-int		db_getid();
 #endif
