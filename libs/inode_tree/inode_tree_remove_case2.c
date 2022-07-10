@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 13:30:48 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 16:10:06 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:15:37 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,19 @@ static t_itree *case_2c(t_itree *T, t_db *datablock, int t, int i)
 t_itree	*rmv_case2_handler(t_itree *T, t_db *datablock, int t, int i)
 {
 	if (!T->leaf && CHK_THIS_C_T)
+	{
 		T = case_2a(T, t, i);
+		return (T);
+	}		
 	if (!T->leaf && CHK_NEXT_C_T)
+	{
 		T = case_2b(T, t, i);
+		return (T);
+	}		
 	if (!T->leaf && CHK_NEXT_C_MIN && CHK_THIS_C_MIN)
+	{
 		T = case_2c(T, datablock, t, i);
+		return (T);
+	}		
 	return (T);
 }
