@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Vars
-T="5"
+T="5 10"
 ADD_FILE1="a n teste1.txt"
 ADD_FILE2="a n teste2.txt"
 ADD_FILE3="a n teste3.txt"
