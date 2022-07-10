@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_block.h                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 17:00:02 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:40:34 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 09:26:22 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 15:56:05 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_BLOCK_H
-# define DATA_BLOCK_H
-# include <stdlib.h>
+#include "misc_methods.h"
 
-typedef struct s_datablock
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		id;
-	int		previous_id;
-	int		next_id;
-	char	*content;
-}				t_db;
+	char	*dst;
+	size_t	buffer_size;
 
-t_db	*db_new(int id, int previous_id, char *content);
-void	db_del(t_db *target);
-int		db_getid();
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	buffer_size = sizeof(char) * (strlen(s1) + strlen(s2) + 1);
+	dst = (char *) malloc(buffer_size);
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, s1, buffer_size);
+	ft_strlcat(dst, s2, buffer_size);
+	return (dst);
+}

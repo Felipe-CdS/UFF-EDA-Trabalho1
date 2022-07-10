@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:18:01 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 12:55:38 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:58:55 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,15 +182,24 @@ t_itree	*rmv_case3_handler(t_itree *T, t_db *datablock, int t, int i)
 
 	z = NULL;
 	if ((i < T->n_db) && CHK_NEXT_C_T)
+	{
 		T = case_3a_1(T, datablock, t, i);
-
+		return (T);
+	}
 	if ((!z) && (i > 0) && CHK_PREV_C_T)
+	{
 		T = case_3a_2(T, datablock, t, i);
-
+		return (T);
+	}
 	if ((!z) && i < T->n_db && CHK_NEXT_C_MIN)
+	{
 		T = case_3b_1(T, datablock, t, i);
-
+		return (T);
+	}
 	if ((!z) && (i > 0) && CHK_PREV_C_MIN)
+	{
 		T = case_3b_2(T, datablock, t, i);
+		return (T);
+	}	
 	return (T);
 }

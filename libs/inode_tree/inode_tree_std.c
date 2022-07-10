@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 16:29:14 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 09:41:57 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,20 @@ void	ibt_print(t_itree *T)
 		printf(">A arvore esta vazia no momento. Adicione um arquivo para utilizar essa opção.\n\n");
 	else
 		print_aux(T, 0);
+}
+
+t_db	*ibt_get_db_by_id(t_itree *T, int id)
+{
+	int		i;
+    t_itree	*aux;
+    t_db	*db;
+
+	i = 0;
+	aux = ibt_search(T, id);
+	if(!aux)
+		return (NULL);
+	while((i < aux->n_db) && (aux->blocks[i]->id != id)) 
+		i++;
+	db = aux->blocks[i];
+	return (db);
 }

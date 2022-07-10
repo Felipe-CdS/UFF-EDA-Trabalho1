@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_block.h                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/29 17:00:02 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:40:34 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 09:48:20 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 15:56:10 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_BLOCK_H
-# define DATA_BLOCK_H
-# include <stdlib.h>
+#include "misc_methods.h"
 
-typedef struct s_datablock
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int		id;
-	int		previous_id;
-	int		next_id;
-	char	*content;
-}				t_db;
+	unsigned int	i;
 
-t_db	*db_new(int id, int previous_id, char *content);
-void	db_del(t_db *target);
-int		db_getid();
-#endif
+	i = 0;
+	if (!src[i] || dstsize == 1)
+	{
+		dst[i] = '\0';
+		return (strlen(src));
+	}
+	while (src[i] && i < dstsize)
+	{
+		dst[i] = src[i];
+		++i;
+		if (!src[i] || i == dstsize - 1)
+		{
+			dst[i] = '\0';
+			break ;
+		}
+	}
+	return (strlen(src));
+}
