@@ -36,7 +36,7 @@ void file_print(t_itable **list, t_itree *T, char *filename){
 		id = list_node->id;
         printf("Arquivo [%s]:\n", filename);
 		file_print_aux(T, id);
-		printf("\n");
+		printf("\n\n");
     }
     else printf("Arquivo não encontrado\n");
 }

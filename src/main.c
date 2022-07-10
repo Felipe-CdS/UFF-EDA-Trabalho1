@@ -18,7 +18,7 @@
 
 static void test_insert_file()
 {
-	int			i, t, max_buffer, fsize;
+	int			i, t, pos, max_buffer, fsize;
 	t_itable	*file_list;
 	t_itree		*tree;
 	char 		*filename, *content, *newfile_name, *newfile_content, op;
@@ -48,7 +48,7 @@ static void test_insert_file()
 
 	if(t < 2) t = 2;
 	while(i != -1){
-		printf("Escolha uma operação:\n\na: adicionar arquivo;\nr: remover arquivo;\nl: printar tabela;\nt: printar arvore;\np: printar arquivo\n");
+		printf("Escolha uma operação:\n\na: adicionar arquivo;\nr: remover arquivo;\nl: printar tabela;\nt: printar arvore;\np: printar arquivo\ni: inserir nova informação em um arquivo\n");
 		scanf(" %c", &op);
 		printf("\n");
 		op = tolower(op);
@@ -59,10 +59,10 @@ static void test_insert_file()
 			op = tolower(op);
 			if(op == 's'){
 				printf("Insira o nome do arquivo a ser criado:\n");
-				scanf(" %*c%[^\n]", newfile_name);
+				scanf("%*c%[^\n]", newfile_name);
 				printf("\n");
 				printf("Insira o conteúdo do arquivo:\n");
-				scanf(" %*c%[^\n]", newfile_content);
+				scanf("%*c%[^\n]", newfile_content);
 				printf("\n");
 
 				file.filename = strdup(newfile_name);
@@ -107,6 +107,19 @@ static void test_insert_file()
 			printf("Insira o nome do arquivo a ser printado:\n");
 			scanf("%*c%[^\n]", filename);
 			file_print(&file_list, tree, filename);
+		}
+		else if (op == 'i'){
+			printf("Insira o nome do arquivo:\n");
+			scanf("%*c%[^\n]", filename);
+			printf("Insira o conteúdo a ser adicionado:\n");
+			scanf("%*c%[^\n]", content);
+			printf("Insira a posição (começando do 0):\n");
+			scanf("%d", &pos);
+
+			file.filename = strdup(filename);
+			file.content = strdup(content);
+
+			tree = file_add_text(&file_list, tree, t, file, max_buffer, pos);
 		}
 	}
 	free(content);
