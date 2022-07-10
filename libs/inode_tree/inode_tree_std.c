@@ -6,16 +6,12 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/07/06 13:57:05 by fcoutinh         ###   ########.fr       */
-=======
-/*   Updated: 2022/07/10 09:41:57 by fcoutinh         ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2022/07/10 18:37:12 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inode_tree.h"
-#include "misc_functions.h"
+#include "misc_methods.h"
 
 t_itree	*ibt_new(int t)
 {

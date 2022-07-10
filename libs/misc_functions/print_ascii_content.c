@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:22:54 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/06 13:58:00 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:38:20 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 *	This can prevent any '\n' or '\t' inside the file breaking 
 *	the tree print formating.
 */
-#include "misc_functions.h"
+#include "misc_methods.h"
 
 static int	ft_isprint(unsigned char c)
 {
@@ -35,9 +35,9 @@ void	print_ascii_content(char *content)
 	while(content[i])
 	{
 		if(ft_isprint(content[i]))
-			printf("%c", content[i]);
+			printf(GRN "%c" RESET, content[i]);
 		else
-			printf(".");
+			printf(RED "." RESET);
 		i++;
 	}
 }
