@@ -6,14 +6,14 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:18:01 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/04 20:30:44 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 17:58:55 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inode_tree.h"
 #include "private_headers/inode_tree_rmv_cases.h"
 
-static void	case_3a_1(t_itree *T, t_db *datablock, int t, int i)
+static t_itree *case_3a_1(t_itree *T, t_db *datablock, int t, int i)
 {
 	int		j;
 	t_itree	*y;
@@ -39,9 +39,10 @@ static void	case_3a_1(t_itree *T, t_db *datablock, int t, int i)
 	}
 	z->n_db--;
 	T->c[i] = ibt_remove(T->c[i], datablock, t);
+	return (T);
 }
 
-static void	case_3a_2(t_itree *T, t_db *datablock, int t, int i)
+static t_itree *case_3a_2(t_itree *T, t_db *datablock, int t, int i)
 {
 	int		j;
 	t_itree	*y;
@@ -67,9 +68,10 @@ static void	case_3a_2(t_itree *T, t_db *datablock, int t, int i)
 	y->c[0] = z->c[z->n_db];
 	z->n_db--;
 	T->c[i] = ibt_remove(y, datablock, t);
+	return (T);
 }
 
-static void	case_3b_1(t_itree *T, t_db *datablock, int t, int i)
+static t_itree *case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 {
 	int		j;
 	t_itree	*tmp;
@@ -115,14 +117,20 @@ static void	case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 		ibt_clear(tmp);
 	}
 	T = ibt_remove(T, datablock, t);
+	return (T);
 }
 
-static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
+static t_itree *case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 {
 	int		j;
 	t_itree	*tmp;
 	t_itree	*y;
 	t_itree	*z;
+
+	(void) y;
+	(void) j;
+	(void) tmp;
+	(void) datablock;
 
 	y = T->c[i];
 	z = T->c[(i - 1)];
@@ -145,6 +153,7 @@ static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 		{
 			z->c[(t + j)] = y->c[j];
 			y->c[j] = NULL;
+			j++;
 		}
 		ibt_clear(y);
 	}
@@ -158,39 +167,35 @@ static void	case_3b_2(t_itree *T, t_db *datablock, int t, int i)
 		ibt_clear(tmp);
 	}
 	else
-	T->c[(i - 1)] = z;
+		T->c[(i - 1)] = z;
 	T = ibt_remove(T, datablock, t);
+	return (T);
 }
 
-int	rmv_case3_handler(t_itree *T, t_db *datablock, int t, int i)
+t_itree	*rmv_case3_handler(t_itree *T, t_db *datablock, int t, int i)
 {
-	t_itree	*y;
 	t_itree	*z;
 
-	y = T->c[i];
 	z = NULL;
-	if (y->n_db == (t - 1))
+	if ((i < T->n_db) && CHK_NEXT_C_T)
 	{
-		if ((i < T->n_db) && CHK_NEXT_C_T)
-		{
-			case_3a_1(T, datablock, t, i);
-			return (1);
-		}
-		if ((!z) && (i > 0) && CHK_PREV_C_T)
-		{
-			case_3a_2(T, datablock, t, i);
-			return (1);
-		}
-		if ((!z) && i < T->n_db && CHK_NEXT_C_MIN)
-		{
-			case_3b_1(T, datablock, t, i);
-			return (1);
-		}
-		if ((!z) && (i > 0) && CHK_PREV_C_MIN)
-		{
-			case_3b_2(T, datablock, t, i);
-			return (1);
-		}
+		T = case_3a_1(T, datablock, t, i);
+		return (T);
 	}
-	return (0);
+	if ((!z) && (i > 0) && CHK_PREV_C_T)
+	{
+		T = case_3a_2(T, datablock, t, i);
+		return (T);
+	}
+	if ((!z) && i < T->n_db && CHK_NEXT_C_MIN)
+	{
+		T = case_3b_1(T, datablock, t, i);
+		return (T);
+	}
+	if ((!z) && (i > 0) && CHK_PREV_C_MIN)
+	{
+		T = case_3b_2(T, datablock, t, i);
+		return (T);
+	}	
+	return (T);
 }

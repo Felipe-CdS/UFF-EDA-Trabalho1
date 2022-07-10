@@ -6,7 +6,11 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/07/06 13:57:05 by fcoutinh         ###   ########.fr       */
+=======
+/*   Updated: 2022/07/10 09:41:57 by fcoutinh         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +66,7 @@ t_itree	*ibt_search(t_itree *T, int db_id)
 	int	i;
 
 	i = 0;
-	if (!T)
+	if (!T || db_id == -1)
 		return (NULL);
 	while (i < T->n_db && db_id > (T->blocks[i])->id)
 		i++;
@@ -104,5 +108,24 @@ static void	print_aux(t_itree *T, int level)
 
 void	ibt_print(t_itree *T)
 {
-	print_aux(T, 0);
+	if(!T)
+		printf(">A arvore esta vazia no momento. Adicione um arquivo para utilizar essa opção.\n\n");
+	else
+		print_aux(T, 0);
+}
+
+t_db	*ibt_get_db_by_id(t_itree *T, int id)
+{
+	int		i;
+    t_itree	*aux;
+    t_db	*db;
+
+	i = 0;
+	aux = ibt_search(T, id);
+	if(!aux)
+		return (NULL);
+	while((i < aux->n_db) && (aux->blocks[i]->id != id)) 
+		i++;
+	db = aux->blocks[i];
+	return (db);
 }

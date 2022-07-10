@@ -14,7 +14,7 @@
 
 t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int max_len)
 {
-    int i, id, txt_len;
+    int i, id, previous_id, txt_len;
 
     t_db *db;
     char *p;
@@ -22,7 +22,8 @@ t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int ma
     i = 0;
 	p = NULL;
     db = NULL;
-    id = db_getid(); 
+    id = db_getid();
+    previous_id = -1;
 	it_add_back(list, it_new(id, data.filename));
     txt_len = strlen(data.content);
 	if(!txt_len)
@@ -35,8 +36,10 @@ t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int ma
 		if(i)
 			id = db_getid();
 		p = strndup((data.content + i), max_len);
-        db = db_new(id, -1, p);
+        db = db_new(id, previous_id, p);
+        if(i < txt_len - max_len) db->next_id = id + 1;
         T = ibt_insert(T, db, t);
+        previous_id = id;
         free(p);
     }
     return T;

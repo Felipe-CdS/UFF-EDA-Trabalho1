@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inode_tree_remove_case1.c                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 13:36:34 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 12:55:11 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 09:48:20 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 15:56:10 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inode_tree.h"
-#include "private_headers/inode_tree_rmv_cases.h"
+#include "misc_methods.h"
 
-t_itree	*rmv_case1_handler(t_itree *T, int i)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	while (i < (T->n_db - 1))
+	unsigned int	i;
+
+	i = 0;
+	if (!src[i] || dstsize == 1)
 	{
-		T->blocks[i] = T->blocks[(i + 1)];
-		i++;
+		dst[i] = '\0';
+		return (strlen(src));
 	}
-	T->n_db--;
-	if (!T->n_db)
+	while (src[i] && i < dstsize)
 	{
-		ibt_clear(T);
-		T = NULL;
+		dst[i] = src[i];
+		++i;
+		if (!src[i] || i == dstsize - 1)
+		{
+			dst[i] = '\0';
+			break ;
+		}
 	}
-	return (T);
+	return (strlen(src));
 }

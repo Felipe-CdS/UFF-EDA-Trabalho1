@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inode_tree_remove_case1.c                          :+:      :+:    :+:   */
+/*   menu_get_next_op.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 13:36:34 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/08 12:55:11 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 10:18:20 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 14:59:48 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inode_tree.h"
-#include "private_headers/inode_tree_rmv_cases.h"
+#include "menu_methods.h"
 
-t_itree	*rmv_case1_handler(t_itree *T, int i)
+void	menu_get_next_op(char *op)
 {
-	while (i < (T->n_db - 1))
-	{
-		T->blocks[i] = T->blocks[(i + 1)];
-		i++;
-	}
-	T->n_db--;
-	if (!T->n_db)
-	{
-		ibt_clear(T);
-		T = NULL;
-	}
-	return (T);
+	printf("Escolha uma operação: (a: adicionar; r: remover; l: printar lista; t: printar arvore; s: procurar str;)\n");
+	scanf(" %c", op);
+	*op = tolower(*op);
 }
