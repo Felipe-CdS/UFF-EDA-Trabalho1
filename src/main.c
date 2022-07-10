@@ -27,8 +27,6 @@ int	main(void)
 		menu_get_next_op(&op);
 		if (op == 'a')
 			menu_add_new_file(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
-		if (op == 'i')
-			menu_add_text(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
 		if (op == 'r')
 			menu_remove_file(&tree, &file_list, &T);
 		if (op == 's')
@@ -37,6 +35,10 @@ int	main(void)
 			menu_print_list(&file_list);
 		if (op == 't')
 			menu_print_tree(&tree);
+		if (op == 's')
+			menu_search_str(&tree, &file_list);
+		if (op == 'i')
+			menu_add_text(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
 		if (op == 'p')
 			menu_print_file(&tree, &file_list);
 	}
