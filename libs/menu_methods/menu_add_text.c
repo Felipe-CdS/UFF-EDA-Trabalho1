@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu_print_file.c                                  :+:      :+:    :+:   */
+/*   menu_add_text.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 19:51:30 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 19:53:27 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 19:37:14 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 19:50:05 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "menu_methods.h"
 #include "misc_methods.h"
 
-void	menu_print_file(t_itree  **tree, t_itable **file_list)
+void	menu_add_text(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER)
 {
+	int		pos;
 	char	*filename;
+	char	*content;
+	t_filedata 	file;
 
 	filename = NULL;
-	printf("Insira o nome do arquivo a ser printado:\n");
+	content = NULL;
+	printf("Insira o nome do arquivo:\n");
 	getchar();
 	get_single_line_stdin(&filename);
-	file_print(file_list, (*tree), filename);
+	printf("Insira o conteúdo a ser adicionado:\n");
+	get_single_line_stdin(&content);
+	printf("Insira a posição (começando do 0):\n");
+	scanf("%d", &pos);
+	file.filename = filename;
+	file.content = content;
+	(*tree) = file_add_text(file_list, (*tree), *t, file, *MAX_BLOCK_BUFFER, pos);
 	free(filename);
+	free(content);
 }

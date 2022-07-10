@@ -6,12 +6,12 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:41:57 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 18:37:12 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inode_tree.h" 
-#include <unistd.h>
+#include "inode_tree.h"
+#include "misc_methods.h"
 
 t_itree	*ibt_new(int t)
 {
@@ -93,7 +93,9 @@ static void	print_aux(t_itree *T, int level)
 				j++;
 			}
 			holder = T->blocks[i];
-			printf("%02d - |%s|\n", holder->id, holder->content);
+			printf("%02d |", holder->id);
+			print_ascii_content(holder->content);
+			printf("|\n");
 			i++;
 		}
 		print_aux(T->c[i], (level + 1));

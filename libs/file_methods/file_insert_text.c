@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_insert.c                                      :+:      :+:    :+:   */
+/*   file_add_text.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 08:58:59 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/06 12:56:20 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:54:34 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_itree *file_insert_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos)
 {
-    int id, new_id, i = 0, j = 0, previous_id, next_id, current_pos = 0;
+    int id, new_id, i = 0, j = 0, previous_id, next_id, current_pos = 0, txt_len;
     t_itree *aux;
     t_db *db, *db_n, *db_m;
 	t_itable *list_node;
-    char *p, *split_node_text, *txt_len;
+    char *p, *split_node_text;
 
 	list_node = it_search(*list, data.filename);
     if(list_node) {
@@ -32,7 +32,7 @@ t_itree *file_insert_text(t_itable **list, t_itree *T, int t, t_filedata data, i
             aux = ibt_search(T, id);
             if(!aux){
                 printf("Posição não encontrada\n");
-                return;
+                return(T);
             }
             while((i < aux->n_db) && (aux->blocks[i]->id != id)) i++;
             db = aux->blocks[i];
@@ -82,8 +82,8 @@ t_itree *file_insert_text(t_itable **list, t_itree *T, int t, t_filedata data, i
             free(p);
         }
         if(j % max_len != 0) db_n->previous_id = previous_id;
-        ibt_print(T);
         return T;
     }
     else printf("Arquivo não encontrado\n");
+	return(T);
 }
