@@ -20,10 +20,12 @@
 #include <ctype.h>
 
 void	menu_start_routine(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER, char *op);
+void    menu_add_text_to_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER);
 void	menu_add_new_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER);
 void	menu_remove_file(t_itree  **tree, t_itable **file_list, int *t);
 void	menu_free_routine(t_itree  **tree, t_itable **file_list);
 void	menu_search_str(t_itree  **tree, t_itable **file_list);
+void	menu_print_file(t_itree **tree, t_itable **file_list);
 void	menu_print_list(t_itable **file_list);
 void	menu_print_tree(t_itree  **tree);
 void	menu_get_next_op(char *op);

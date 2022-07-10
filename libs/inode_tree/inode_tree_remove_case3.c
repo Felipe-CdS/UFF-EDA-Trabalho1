@@ -67,8 +67,6 @@ static t_itree *case_3a_2(t_itree *T, t_db *datablock, int t, int i)
 	T->blocks[(i - 1)] = z->blocks[(z->n_db - 1)];
 	y->c[0] = z->c[z->n_db];
 	z->n_db--;
-	if(datablock->id == 13) ibt_print(T);
-	printf("\n");
 	T->c[i] = ibt_remove(y, datablock, t);
 	return (T);
 }
@@ -119,7 +117,6 @@ static t_itree *case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 		ibt_clear(tmp);
 	}
 	if(datablock->id == 13) ibt_print(T);
-	printf("\n");
 	T = ibt_remove(T, datablock, t);
 	return (T);
 }
