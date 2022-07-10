@@ -24,7 +24,7 @@ typedef struct s_filedata
 
 t_itree *file_insert(t_itable **list, t_itree *T, int t, t_filedata data, int max_len);
 t_itree *file_remove(t_itable **list, t_itree *T, int t, char *filename);
-t_itree	*file_insert_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos);
+t_itree	*file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos);
 t_db	*file_search(t_itable **list, t_itree *T, char *filename, char *str);
 
 void 	file_print(t_itable **list, t_itree *T, char *filename);

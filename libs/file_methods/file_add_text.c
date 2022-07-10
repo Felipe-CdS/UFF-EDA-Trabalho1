@@ -12,7 +12,7 @@
 
 #include "file_methods.h"
 
-t_itree *file_insert_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos)
+t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos)
 {
     int id, new_id, i = 0, j = 0, previous_id, next_id, current_pos = 0, txt_len;
     t_itree *aux;
