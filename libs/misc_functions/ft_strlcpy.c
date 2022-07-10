@@ -6,11 +6,11 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 09:48:20 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:48:52 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:56:10 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "misc_functions.h"
+#include "misc_methods.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

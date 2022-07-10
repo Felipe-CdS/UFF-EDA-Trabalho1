@@ -6,11 +6,11 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 09:47:23 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:48:18 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:56:08 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "misc_functions.h"
+#include "misc_methods.h"
 
 static unsigned int	min(unsigned int x, unsigned int y)
 {

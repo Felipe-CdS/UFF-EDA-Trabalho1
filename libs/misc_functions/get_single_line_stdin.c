@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_single_line_stdin.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 09:26:22 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 15:56:05 by fcoutinh         ###   ########.fr       */
+/*   Created: 2022/07/10 15:53:54 by fcoutinh          #+#    #+#             */
+/*   Updated: 2022/07/10 15:55:48 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "misc_methods.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void get_single_line_stdin(char **str)
 {
-	char	*dst;
-	size_t	buffer_size;
+	int i = 1;
+	int t = 0;
+	char c;
 
-	if (!s1 || !s2)
-		return (NULL);
-	buffer_size = sizeof(char) * (strlen(s1) + strlen(s2) + 1);
-	dst = (char *) malloc(buffer_size);
-	if (!dst)
-		return (NULL);
-	ft_strlcpy(dst, s1, buffer_size);
-	ft_strlcat(dst, s2, buffer_size);
-	return (dst);
+    while(1){
+        if((c = getchar()) != '\n')
+		{
+            (*str) = realloc((*str), i * sizeof(char));
+            *((*str)+t) = c;
+            t++;
+            i++;
+        } else 
+		{
+            (*str) = realloc((*str), i * sizeof(char));
+            *((*str)+t) = '\0';
+            break;
+        }
+    }
 }

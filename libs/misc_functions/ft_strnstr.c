@@ -6,11 +6,11 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 19:04:27 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 09:35:10 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 15:56:14 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "misc_functions.h"
+#include "misc_methods.h"
 
 static int	check_needle(char *n_ptr, char *s_ptr, unsigned int h, size_t len)
 {
