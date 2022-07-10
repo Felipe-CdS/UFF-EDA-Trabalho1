@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:18:01 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 17:58:55 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 19:31:57 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static t_itree *case_3a_2(t_itree *T, t_db *datablock, int t, int i)
 	T->blocks[(i - 1)] = z->blocks[(z->n_db - 1)];
 	y->c[0] = z->c[z->n_db];
 	z->n_db--;
-	if(datablock->id == 13) ibt_print(T);
-	printf("\n");
 	T->c[i] = ibt_remove(y, datablock, t);
 	return (T);
 }
@@ -118,8 +116,6 @@ static t_itree *case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 		tmp->c[0] = NULL;
 		ibt_clear(tmp);
 	}
-	if(datablock->id == 13) ibt_print(T);
-	printf("\n");
 	T = ibt_remove(T, datablock, t);
 	return (T);
 }
