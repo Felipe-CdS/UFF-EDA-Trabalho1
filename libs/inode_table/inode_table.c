@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:43:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 12:52:17 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 20:05:49 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	it_print(t_itable **start)
 	printf("+---------------------------------------+\n");
 	while (p)
 	{
-		printf("| %02d | %-33s|\n", p->id, p->filename);
+		printf("| %03d | %-32s|\n", p->id, p->filename);
 		p = p->next;
 	}
 	printf("+---------------------------------------+\n");
