@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 18:20:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 16:22:45 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:40:14 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static t_db	*file_search_aux(t_itree *T, int id, char *str)
 {
 	int 	this_id, next_id;
-	t_db	*this_id_db, *next_id_db;
+	t_db	*this_id_db, *next_id_db, *result;
 	char 	*this_id_content, *next_id_content;
 	char	*content;
 
@@ -37,14 +37,19 @@ static t_db	*file_search_aux(t_itree *T, int id, char *str)
 			content = ft_strjoin(this_id_content, next_id_content);
 
 		if(ft_strnstr(content, str, strlen(content)))
+		{
+			result = this_id_db;
+			if(ft_strnstr(next_id_content, str, strlen(content)))
+				result = next_id_db;
 			break;
+		}			
 		this_id = next_id;
 	}
 	free(this_id_content);
 	free(next_id_content);	
 	free(content);
 	if(this_id != -1)
-		return (this_id_db);
+		return (result);
 	return(NULL);
 }
 

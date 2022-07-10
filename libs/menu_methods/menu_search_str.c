@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 14:56:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 16:26:06 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 16:43:01 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	menu_search_str(t_itree  **tree, t_itable **file_list)
 	if(!result)
 		printf(">Arquivo ou string não encontrado.\n");
 	else
-		printf(">Primeira ocorrencia de \"%s\" é no bloco {ID: %02d; Conteudo: |%s|}\n\n", search_str, result->id, result->content);
+		printf(">Primeira ocorrencia de \"%s\" começa no bloco {ID: %02d; Conteudo: |%s|}\n\n", search_str, result->id, result->content);
 	free(filename);
 	free(search_str);
 }
