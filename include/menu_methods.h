@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 10:12:26 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 19:52:10 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 22:38:25 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	menu_add_new_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_B
 void	menu_add_text(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER);
 void	menu_remove_file(t_itree  **tree, t_itable **file_list, int *t);
 void	menu_free_routine(t_itree  **tree, t_itable **file_list);
+void	menu_crop_text(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK_BUFFER);
 void	menu_search_str(t_itree  **tree, t_itable **file_list);
 void	menu_print_file(t_itree  **tree, t_itable **file_list);
 void	menu_save_file(t_itree  **tree, t_itable **file_list);

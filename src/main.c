@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:34:57 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 19:51:11 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 23:10:38 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	main(void)
 			menu_print_file(&tree, &file_list);
 		if (op == 'f')
 			menu_save_file(&tree, &file_list);
+		if (op == 'c')
+			menu_crop_text(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
 	}
 	menu_free_routine(&tree, &file_list);
 	return (0);
