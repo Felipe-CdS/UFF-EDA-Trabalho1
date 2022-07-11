@@ -34,6 +34,10 @@ void	menu_add_new_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_B
 		printf("Insira o nome do arquivo a ser criado:\n");
 		getchar();
 		get_single_line_stdin(&newfile_name);
+		if(it_search(*file_list, newfile_name)){
+        	printf(">Já existe um arquivo de mesmo nome na árvore\n");
+			return;
+    	}
 		printf("Insira o conteúdo do arquivo: (; para finalizar)\n");
 		get_multi_lines_stdin(&newfile_content);
 	}
@@ -41,6 +45,10 @@ void	menu_add_new_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_B
 		printf("Insira o nome do arquivo a ser carregado:\n");
 		getchar();
 		get_single_line_stdin(&newfile_name);
+		if(it_search(*file_list, newfile_name)){
+        	printf(">Já existe um arquivo de mesmo nome na árvore\n");
+			return;
+    	}
 		fp = fopen(newfile_name, "r");
 		if(!fp)
 		{
