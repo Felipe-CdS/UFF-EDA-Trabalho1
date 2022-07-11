@@ -61,6 +61,7 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             next_id = db->next_id;
             previous_id = db->id;
             db->next_id = new_id;
+            free(split_node_text);
         }
         txt_len = strlen(data.content);
         if(!txt_len){

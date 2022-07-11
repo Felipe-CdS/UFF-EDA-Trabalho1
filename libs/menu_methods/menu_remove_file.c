@@ -22,4 +22,5 @@ void	menu_remove_file(t_itree  **tree, t_itable **file_list, int *t)
 	getchar();
 	get_single_line_stdin(&filename);
 	*tree = file_remove(file_list, *tree, *t, filename);
+	free(filename);
 }

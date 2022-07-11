@@ -29,8 +29,6 @@ int	main(void)
 			menu_add_new_file(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
 		if (op == 'r')
 			menu_remove_file(&tree, &file_list, &T);
-		if (op == 's')
-			menu_search_str(&tree, &file_list);
 		if (op == 'l')
 			menu_print_list(&file_list);
 		if (op == 't')
