@@ -27,6 +27,7 @@ void	menu_remove_file(t_itree  **tree, t_itable **file_list, int *t);
 void	menu_free_routine(t_itree  **tree, t_itable **file_list);
 void	menu_search_str(t_itree  **tree, t_itable **file_list);
 void	menu_print_file(t_itree  **tree, t_itable **file_list);
+void	menu_save_file(t_itree  **tree, t_itable **file_list);
 void	menu_print_list(t_itable **file_list);
 void	menu_print_tree(t_itree  **tree);
 void	menu_get_next_op(char *op);

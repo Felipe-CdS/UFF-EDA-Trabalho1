@@ -41,6 +41,8 @@ int	main(void)
 			menu_add_text(&tree, &file_list, &T, &MAX_BLOCK_BUFFER);
 		if (op == 'p')
 			menu_print_file(&tree, &file_list);
+		if (op == 'f')
+			menu_save_file(&tree, &file_list);
 	}
 	menu_free_routine(&tree, &file_list);
 	return (0);
