@@ -43,7 +43,6 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             id = db->next_id;
         } while((current_pos != pos) && (id != -1));
         if(j == 0 || pos == -1){
-            printf("teste\n");
             new_id = db_getid();
             if(current_pos == 0) list_node->id = new_id;
             next_id = db->id;
@@ -81,7 +80,7 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             T = ibt_insert(T, db_m, t);
             free(p);
         }
-        if(j == 0) db_n->previous_id = previous_id;
+        if(j != 0) db_n->previous_id = previous_id;
         return T;
     }
     else printf("Arquivo não encontrado\n");
