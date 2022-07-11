@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 18:20:21 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 20:23:03 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/10 21:35:27 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_db	*file_search_aux(t_itree *T, int id, char *str)
 		if(ft_strnstr(content, str, strlen(content)))
 		{
 			result = this_id_db;
-			if(ft_strnstr(next_id_content, str, strlen(content)))
+			if(next_id_content && ft_strnstr(next_id_content, str, strlen(content)))
 				result = next_id_db;
 			break;
 		}			
