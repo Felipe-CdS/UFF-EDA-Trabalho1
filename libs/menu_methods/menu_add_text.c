@@ -27,7 +27,7 @@ void	menu_add_text(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK
 	get_single_line_stdin(&filename);
 	printf("Insira o conteúdo a ser adicionado:\n");
 	get_single_line_stdin(&content);
-	printf("Insira a posição (começando do 0):\n");
+	printf("Insira a posição (final do arquivo: -1):\n");
 	scanf("%d", &pos);
 	file.filename = filename;
 	file.content = content;
