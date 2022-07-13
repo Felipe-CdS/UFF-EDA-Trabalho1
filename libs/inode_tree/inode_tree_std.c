@@ -43,12 +43,14 @@ t_itree	*ibt_clear(t_itree *target)
 	{
 		if (!target->leaf)
 		{
-			for(i = 0; i < target->n_db; i++)
+			i = 0;
+			while (i < target->n_db)
+			{
 				ibt_clear(target->c[i]);
+				i++;
+			}
 		}
-		for(i = 0; i < target->n_db; i++) 
-			db_del(target->blocks[i]);
-		free(target->blocks);
+		free(target->blocks); // mem leak: implement function to free each block
 		free(target->c);
 		free(target);
 	}

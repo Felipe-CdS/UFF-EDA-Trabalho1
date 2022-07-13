@@ -22,6 +22,7 @@ void file_print_aux(t_itree *T, int id){
         while((i < aux->n_db) && (aux->blocks[i]->id != id)) i++;
         db = aux->blocks[i];
 
+        printf("\nBLOCO %d(ant: %d | prox: %d)\n", db->id, db->previous_id, db->next_id);
         printf("%s", db->content);
         file_print_aux(T, db->next_id);
     }

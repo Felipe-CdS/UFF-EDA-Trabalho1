@@ -43,16 +43,13 @@ static t_db	*file_search_aux(t_itree *T, int id, char *str)
 			result = this_id_db;
 			if(next_id_content && ft_strnstr(next_id_content, str, strlen(content)))
 				result = next_id_db;
-			free(content);
-			free(this_id_content);
-			free(next_id_content);
 			break;
 		}			
 		this_id = next_id;
-		free(content);
-		free(this_id_content);
-		free(next_id_content);
 	}
+	free(content);
+	free(this_id_content);
+	free(next_id_content);
 	if(this_id != -1)
 		return (result);
 	return(NULL);

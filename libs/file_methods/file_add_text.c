@@ -16,10 +16,12 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
 {
     int id, new_id, i = 0, j = 0, previous_id, next_id, current_pos = 0, txt_len;
     t_itree *aux;
-    t_db *db, *db_n, *db_m;
+    t_db *db, *db_m, *db_n, *db_o;
 	t_itable *list_node;
     char *p, *split_node_text;
 
+    txt_len = strlen(data.content);
+    if(!txt_len) return (T);
 	list_node = it_search(*list, data.filename);
     if(list_node) {
 		id = list_node->id;
@@ -42,15 +44,19 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             }
             id = db->next_id;
         } while((current_pos != pos) && (id != -1));
-        if(j == 0 || pos == -1){
-            new_id = db_getid();
+        new_id = db_getid();
+        if(j == 0){
             if(current_pos == 0) list_node->id = new_id;
             next_id = db->id;
             previous_id = db->previous_id;
             db->previous_id = new_id;
         }
+        else if(pos == -1){
+            next_id = -1;
+            previous_id = db->id;
+            db->next_id = new_id;
+        }
         else {
-            new_id = db_getid();
             split_node_text = strndup((db->content + j), max_len);
             db_n = db_new(new_id, db->id, split_node_text);
             db_n->next_id = db->next_id;
@@ -61,15 +67,6 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             next_id = db->next_id;
             previous_id = db->id;
             db->next_id = new_id;
-            free(split_node_text);
-        }
-        txt_len = strlen(data.content);
-        if(!txt_len){
-            db_m = db_new(new_id, previous_id, "");
-            db->next_id = new_id;
-            db_n->previous_id = previous_id;
-            T = ibt_insert(T, db, t);
-            return (T);
         }
         for(i = 0; i < txt_len; i = i + max_len){
             if(i) new_id = db_getid();
@@ -81,7 +78,11 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             T = ibt_insert(T, db_m, t);
             free(p);
         }
-        if(j != 0) db_n->previous_id = previous_id;
+        if((j != 0) && (pos != -1)) {
+            db_n->previous_id = previous_id;
+            db_o = ibt_get_db_by_id(T, db_n->next_id);
+            db_o->previous_id = db_n->id;
+        }
         return T;
     }
     else printf("Arquivo não encontrado\n");

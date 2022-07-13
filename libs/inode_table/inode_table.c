@@ -86,7 +86,6 @@ void	it_clear(t_itable **start)
 	{
 		q = p;
 		p = p->next;
-		free(q->filename);
 		free(q);
 	}
 	*start = NULL;
