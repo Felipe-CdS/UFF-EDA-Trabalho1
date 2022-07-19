@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 10:27:20 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 16:29:07 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/19 08:50:54 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	menu_add_new_file(t_itree  **tree, t_itable **file_list, int *t, int *MAX_B
 	newfile_name = NULL;
 	newfile_content = NULL;
 	printf("Deseja criar um arquivo novo? (s/n):\n");
-	getchar();
-	op = getchar();
+	scanf(" %c", &op);
 	op = tolower(op);
 	if(op == 's'){
 		printf("Insira o nome do arquivo a ser criado:\n");
