@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:18:01 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 19:31:57 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/15 17:40:16 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ static t_itree *case_3b_1(t_itree *T, t_db *datablock, int t, int i)
 		tmp->c[0] = NULL;
 		ibt_clear(tmp);
 	}
-	if(datablock->id == 13) ibt_print(T);
 	T = ibt_remove(T, datablock, t);
 	return (T);
 }
