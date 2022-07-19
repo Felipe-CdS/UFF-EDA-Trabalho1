@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 20:51:46 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/18 23:19:35 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/19 08:12:47 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ t_itree *file_crop_text(t_itable **list, t_itree *T, int t, char *filename, char
 		if(!strlen(str_start_db->content))
 		{
 			T = ibt_remove(T, str_start_db, t);	
-			it_remove(list, it_search(*list, filename));
+			if(it_search(*list, filename)->id == str_start_db->id)
+				it_remove(list, it_search(*list, filename));
 		}
 				
 		return (T);
