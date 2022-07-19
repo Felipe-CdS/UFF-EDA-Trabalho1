@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 11:49:10 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/10 18:37:12 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:57:19 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,4 +124,34 @@ t_db	*ibt_get_db_by_id(t_itree *T, int id)
 		i++;
 	db = aux->blocks[i];
 	return (db);
+}
+
+t_itree *ibt_reorganize_content(t_itree *T, int db_id, int t, size_t max_len)
+{
+	size_t	crop_size;
+	t_db	*holder, *next;
+
+	holder = ibt_get_db_by_id(T, db_id);
+	if(holder->next_id == -1)
+		return (T);
+	next = ibt_get_db_by_id(T, holder->next_id);
+	crop_size = (max_len - strlen(holder->content));
+	ft_strlcat(holder->content, next->content, (max_len + 1));
+	if(strlen(next->content) < crop_size)
+	{
+		if(ibt_get_db_by_id(T, next->next_id))
+			ibt_get_db_by_id(T, next->next_id)->previous_id = holder->id;
+		holder->next_id = next->next_id;
+
+		T = ibt_remove(T, next, t);
+	}
+	else
+	{
+		memmove(next->content, (next->content + crop_size), max_len);
+	}		
+	if(strlen(holder->content) < max_len)
+		T = ibt_reorganize_content(T, holder->id, t, max_len);
+	else
+		T = ibt_reorganize_content(T, holder->next_id, t, max_len);
+	return (T);
 }
