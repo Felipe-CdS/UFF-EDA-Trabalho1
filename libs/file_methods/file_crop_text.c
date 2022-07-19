@@ -6,7 +6,7 @@
 /*   By: fcoutinh <felipe_coutinho@id.uff.br>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 20:51:46 by fcoutinh          #+#    #+#             */
-/*   Updated: 2022/07/18 22:46:51 by fcoutinh         ###   ########.fr       */
+/*   Updated: 2022/07/18 23:19:35 by fcoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char *search_str_start(char *db_content, char *str)
 			s_ptr = &db_content[h_iter];			
 			while (str[i] && s_ptr[i] == str[i])
 				i++;
-			if (!str[i])
+			if (!str[i] || !s_ptr[i])
 				return (s_ptr);
 		}
 		h_iter++;
