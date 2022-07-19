@@ -14,8 +14,7 @@
 
 t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int max_len, int pos)
 {
-    int id, new_id, i = 0, j = 0, previous_id, next_id, current_pos = 0, txt_len;
-    t_itree *aux;
+    int id, i, j, new_id, previous_id, next_id, current_pos = 0, txt_len;
     t_db *db, *db_m, *db_n, *db_o;
 	t_itable *list_node;
     char *p, *split_node_text;
@@ -27,17 +26,13 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
 		id = list_node->id;
         if(pos < -1) pos = 0;
         do{
-            i = 0;
             j = 0;
             
-            aux = ibt_search(T, id);
-            if(!aux){
-                printf("Posição não encontrada\n");
-                return(T);
+            db = ibt_get_db_by_id(T, id);
+            if(!db){
+                printf("Posição não encontrada.\n");
+                return T;
             }
-            while((i < aux->n_db) && (aux->blocks[i]->id != id)) i++;
-            db = aux->blocks[i];
-
             while(db->content[j] && current_pos != pos) {
                 current_pos++;
                 j++;
@@ -51,7 +46,8 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
             previous_id = db->previous_id;
             db->previous_id = new_id;
         }
-        else if(pos == -1){
+        else if((pos == -1) || (j == ((int) strlen(db->content)) && id == -1)){
+            pos = -1;
             next_id = -1;
             previous_id = db->id;
             db->next_id = new_id;
@@ -85,6 +81,6 @@ t_itree *file_add_text(t_itable **list, t_itree *T, int t, t_filedata data, int 
         }
         return T;
     }
-    else printf("Arquivo não encontrado\n");
+    else printf("Arquivo não encontrado.\n");
 	return(T);
 }

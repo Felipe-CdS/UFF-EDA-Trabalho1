@@ -25,10 +25,10 @@ void	menu_add_text(t_itree  **tree, t_itable **file_list, int *t, int *MAX_BLOCK
 	printf("Insira o nome do arquivo:\n");
 	getchar();
 	get_single_line_stdin(&filename);
-	printf("Insira o conteúdo a ser adicionado:\n");
-	get_single_line_stdin(&content);
 	printf("Insira a posição (final do arquivo: -1):\n");
 	scanf("%d", &pos);
+	printf("Insira o conteúdo a ser adicionado:\n");
+	get_single_line_stdin(&content);
 	file.filename = filename;
 	file.content = content;
 	(*tree) = file_add_text(file_list, (*tree), *t, file, *MAX_BLOCK_BUFFER, pos);
